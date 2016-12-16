@@ -8,7 +8,6 @@ using namespace Models;
 #define PI 3.14159265
 
 BrickModel::BrickModel(){
-	
 }
 
 BrickModel::~BrickModel(){
