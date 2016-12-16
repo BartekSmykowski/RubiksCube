@@ -7,7 +7,7 @@ using namespace RubiksCube;
 
 int main(int argc, char **argv)
 {
-	Cube *cube = new Cube(4);
+	Cube *cube = new Cube(3);
 	Engine *engine = new Engine();
 	engine->Init();
 
