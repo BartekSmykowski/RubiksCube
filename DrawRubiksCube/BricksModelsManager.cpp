@@ -1,6 +1,7 @@
 #include "BricksModelsManager.h"
 #include "BrickModel.h"
 #include <string>
+#include "Action\Petla.h"
 
 using namespace BasicEngine;
 using namespace RubiksCube;
@@ -24,7 +25,8 @@ void BricksModelsManager::updateBricksModels() {
 		for (double j = 0; j < cube->getSize(); j++) {
 			for (double k = 0; k < cube->getSize(); k++) {
 				if (cube->get_brick(glm::vec3(i, j, k)) != nullptr) {
-					string nazwa = "cube" + to_string((int)i) + to_string((int)j) + to_string((int)k);
+					string nazwa = "cube" + to_string((int)i) + to_string((int)j) + 
+									to_string((int)k) + std::to_string(cube->getSize());
 					brickm = (BrickModel*)engine->GetModels_Manager()->GetModel(nazwa);
 					brickm->updateBrick(cube->get_brick(glm::vec3(i, j, k)));
 					brickm->updateVertices();
@@ -44,10 +46,22 @@ void BricksModelsManager::createBricksModels()
 					BrickModel* brickm = new BrickModel();
 					brickm->SetProgram(engine->GetShader_Manager()->GetShader("brickShader"));
 					brickm->Create(glm::vec3(i, j, k), cube->get_brick(glm::vec3(i, j, k)));
-					std::string nazwa = "cube" + std::to_string((int)i) + std::to_string((int)j) + std::to_string((int)k);
+					std::string nazwa = "cube" + std::to_string((int)i) + std::to_string((int)j) +
+									std::to_string((int)k) + std::to_string(cube->getSize());
 					engine->GetModels_Manager()->SetModel(nazwa, brickm);
 				}
 			}
 		}
 	}
+
+	//auto func = [this](int i, int j, int k) {
+	//	if (cube->get_brick(glm::vec3(i, j, k)) != nullptr) {
+	//		BrickModel* brickm = new BrickModel();
+	//		brickm->SetProgram(engine->GetShader_Manager()->GetShader("brickShader"));
+	//		brickm->Create(glm::vec3(i, j, k), cube->get_brick(glm::vec3(i, j, k)));
+	//		std::string nazwa = "cube" + std::to_string((int)i) + std::to_string((int)j) + std::to_string((int)k);
+	//		engine->GetModels_Manager()->SetModel(nazwa, brickm);
+	//	}
+	//};
+	//Petla::petlowanie(3, 3, 3, func);
 }

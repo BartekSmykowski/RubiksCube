@@ -5,13 +5,23 @@ using namespace RubiksCube;
 
 Cube::Cube() {
 
+	this->translation = glm::vec3(0, 0, 0);
 	bricksContainer = new BricksContainer();
 	this->size = 3;
 	bricksContainer->fill(3);
 };
 
 Cube::Cube(int size) {
+	this->translation = glm::vec3(0, 0, 0);
 	bricksContainer = new BricksContainer(size);
+	this->size = size;
+	bricksContainer->fill(size);
+}
+
+RubiksCube::Cube::Cube(int size, glm::vec3 translation)
+{
+	this->translation = translation;
+	bricksContainer = new BricksContainer(size, translation);
 	this->size = size;
 	bricksContainer->fill(size);
 }

@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action\Animator.cpp" />
+    <ClCompile Include="Action\Translation.cpp" />
     <ClCompile Include="BricksContainer.cpp" />
     <ClCompile Include="Action\Rotator.cpp" />
     <ClCompile Include="Elements\Brick.cpp" />
@@ -128,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action\Animator.h" />
+    <ClInclude Include="Action\Translation.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="BricksContainer.h" />
     <ClInclude Include="Action\Rotator.h" />

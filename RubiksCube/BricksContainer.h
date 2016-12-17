@@ -12,6 +12,7 @@ namespace RubiksCube {
 	public:
 		BricksContainer();
 		BricksContainer(int size);
+		BricksContainer(int size, glm::vec3 translation);
 		BricksContainer(const BricksContainer& bricksContainer);
 		~BricksContainer();
 		Brick* getBrick(glm::vec3 wspolzedne);
@@ -23,6 +24,7 @@ namespace RubiksCube {
 	private:
 		Brick ****bricks_;
 		int size;
+		glm::vec3 translation;
 	};
 
 }

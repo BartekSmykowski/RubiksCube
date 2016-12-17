@@ -5,6 +5,7 @@ layout(location = 1) in vec4 in_color;
 uniform mat4 projection_matrix, view_matrix;
 uniform vec3 animationRotation;
 uniform vec3 rotation;
+uniform vec3 translation;
 
 out vec4 color;
 
@@ -48,8 +49,16 @@ void main()
 					0.0, 0.0, 1.0, 0.0,
 					0.0, 0.0, 0.0, 1.0);
 
-	gl_Position = projection_matrix * view_matrix *
+	mat4 translate;
+
+	translate = mat4(1.0, 0.0, 0.0, 0.0,
+					0.0, 1.0, 0.0, 0.0,
+					0.0, 0.0, 1.0, 0.0,
+					translation.x, translation.y, translation.z, 1.0);
+
+	gl_Position = projection_matrix * view_matrix * translate * 
 					rotate_y * rotate_x *rotate_z *
-					arotate_y * arotate_x *arotate_z * vec4(in_position, 1);
+					arotate_y * arotate_x *arotate_z *
+					vec4(in_position, 1);
 
 }

@@ -179,6 +179,10 @@ void BrickModel::Draw(const glm::mat4& projection_matrix,
 		arotation_sin.x,
 		arotation_sin.y,
 		arotation_sin.z);
+	glUniform3f(glGetUniformLocation(program, "translation"),
+		brick->getTranslation()->GetTranslation().x,
+		brick->getTranslation()->GetTranslation().y,
+		brick->getTranslation()->GetTranslation().z);
 	glUniformMatrix4fv(glGetUniformLocation(program, "view_matrix"), 1,
 		false, &view_matrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "projection_matrix"), 1, false, &projection_matrix[0][0]);

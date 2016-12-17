@@ -7,7 +7,9 @@ using namespace RubiksCube;
 
 int main(int argc, char **argv)
 {
-	Cube *cube = new Cube(3);
+	Cube *cube3 = new Cube(3, glm::vec3(0,0,0));
+	Cube *cube2 = new Cube(2, glm::vec3(5, 0, 0));
+	Cube *cube4 = new Cube(4, glm::vec3(-5, 0, 0));
 	Engine *engine = new Engine();
 	engine->Init();
 
@@ -16,28 +18,24 @@ int main(int argc, char **argv)
 		"Shaders\\Cube_Vertex_Shader.glsl",
 		"Shaders\\Cube_Fragment_Shader.glsl");
 
-	BricksModelsManager *bricksModelsManager = new BricksModelsManager(cube, engine);
+	BricksModelsManager *bricksModelsManager = new BricksModelsManager(cube3, engine);
 	bricksModelsManager->createBricksModels();
+	BricksModelsManager *bricksModelsManager2 = new BricksModelsManager(cube2, engine);
+	bricksModelsManager2->createBricksModels();
+	BricksModelsManager *bricksModelsManager4 = new BricksModelsManager(cube4, engine);
+	bricksModelsManager4->createBricksModels();
 
-	EventReceiver::setCube(cube);
+	EventReceiver::setCube(cube3);
 	EventReceiver::setEngine(engine);
 	EventReceiver::setModelsManager(bricksModelsManager);
 	engine->GetEvents_Manager()->setKeyDownCallback(EventReceiver::KeyCallback);
 	engine->GetEvents_Manager()->setMouseMoveCallback(EventReceiver::MouseMoveCallback);
 	engine->GetEvents_Manager()->setPassiveMouseMoveCallback(EventReceiver::PassiveMouseMoveCallback);
 
-	//Petla::petlowanie(3, 3, 3, [](int i, int j, int k) {
-	//	BrickModel* brickm = new BrickModel();
-	//	brickm->SetProgram(engine->GetShader_Manager()->GetShader("brickShader"));
-	//	brickm->Create(glm::vec3(i, j, k), cube->get_brick(glm::vec3(i, j, k)));
-	//	string nazwa = "cube" + to_string((int)i) + to_string((int)j) + to_string((int)k);
-	//	engine->GetModels_Manager()->SetModel(nazwa, brickm);
-	//})
-
 
 	engine->Run();
 
 	delete engine;
-	delete cube;
+	delete cube3;
 	return 0;
 }
