@@ -17,6 +17,7 @@ BricksModelsManager::~BricksModelsManager()
 BricksModelsManager::BricksModelsManager(Cube *cube, Engine *engine) {
 	this->engine = engine;
 	this->cube = cube;
+	createBricksModels();
 }
 
 void BricksModelsManager::updateBricksModels() {

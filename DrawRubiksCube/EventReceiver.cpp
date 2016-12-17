@@ -4,9 +4,9 @@
 
 using namespace std;
 
-Cube *EventReceiver::cube = NULL;
+vector<Cube *> EventReceiver::cubes = {};
 Engine *EventReceiver::engine = NULL;
-BricksModelsManager *EventReceiver::bricksModelsManager = NULL;
+vector<BricksModelsManager *> EventReceiver::bricksModelsManagers = {};
 int EventReceiver::x = 0;
 int EventReceiver::y = 0;
 
@@ -19,7 +19,7 @@ EventReceiver::~EventReceiver() {
 }
 
 void EventReceiver::setCube(Cube *cubep) {
-	cube = cubep;
+	cubes.push_back(cubep);
 }
 
 void EventReceiver::setEngine(Engine *enginep) {
@@ -27,43 +27,48 @@ void EventReceiver::setEngine(Engine *enginep) {
 }
 
 void EventReceiver::setModelsManager(BricksModelsManager *bmm) {
-	bricksModelsManager = bmm;
+	bricksModelsManagers.push_back(bmm);
 }
 
 void EventReceiver::KeyCallback(unsigned char key, int x, int y){
-	BrickModel* brickm = new BrickModel();
-	switch (key) {
-	case 'a':case 'w':case 'd':case 's':case 'e':
-		engine->GetScene_Manager()->notifyKeyDown(key, x, y);
-		break;
-	case 'u':
-		cube->rotate_wall(UP, CLOCK);
-		break;
-	case 'n':
-		cube->rotate_wall(DOWN, CLOCK);
-		break;
-	case 'y':
-		cube->rotate_wall(LEFT, CLOCK);
-		break;
-	case 'i':
-		cube->rotate_wall(RIGHT, CLOCK);
-		break;
-	case 'h':
-		cube->rotate_wall(FRONT, CLOCK);
-		break;
-	case 'k':
-		cube->rotate_wall(BACK, CLOCK);
-		break;
+	for (int i = 0; i < cubes.size(); i++) {
+		switch (key) {
+		case 'a':case 'w':case 'd':case 's':case 'e':
+			engine->GetScene_Manager()->notifyKeyDown(key, x, y);
+			break;
+		case 'u':
+			cubes[i]->rotate_wall(UP, CLOCK);
+			break;
+		case 'n':
+			cubes[i]->rotate_wall(DOWN, CLOCK);
+			break;
+		case 'y':
+			cubes[i]->rotate_wall(LEFT, CLOCK);
+			break;
+		case 'i':
+			cubes[i]->rotate_wall(RIGHT, CLOCK);
+			break;
+		case 'h':
+			cubes[i]->rotate_wall(FRONT, CLOCK);
+			break;
+		case 'k':
+			cubes[i]->rotate_wall(BACK, CLOCK);
+			break;
+		}
+		bricksModelsManagers[i]->updateBricksModels();
 	}
-	bricksModelsManager->updateBricksModels();
 }
 
 void EventReceiver::MouseMoveCallback(int x, int y) {
-	engine->GetScene_Manager()->notifyMouseMove(x, y);
-	glm::vec3 rotationOld = cube->getRotation();
-	glm::vec3 newRotation = rotationOld + glm::vec3(y - EventReceiver::y, x - EventReceiver::x, 0);
-	cube->setRotation(newRotation);
-	bricksModelsManager->updateBricksModels();
+	for (int i = 0; i < cubes.size(); i++) {
+		int mod = 0;
+		engine->GetScene_Manager()->notifyMouseMove(x, y);
+		glm::vec3 rotationOld = cubes[i]->getRotation();
+		i % 2 == 0 ? mod = -1 : mod = 1;
+		glm::vec3 newRotation = rotationOld + glm::vec3(mod*(y - EventReceiver::y), mod*(x - EventReceiver::x), 0);
+		cubes[i]->setRotation(newRotation);
+		bricksModelsManagers[i]->updateBricksModels();
+	}
 	EventReceiver::x = x;
 	EventReceiver::y = y;
 }
