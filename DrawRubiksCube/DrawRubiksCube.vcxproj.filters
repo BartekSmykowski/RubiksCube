@@ -33,6 +33,9 @@
     <ClCompile Include="Action\Petla.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FloorModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action\ColorArranger.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Action\Petla.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
