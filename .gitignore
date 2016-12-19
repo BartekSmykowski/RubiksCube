@@ -1,2 +1,17 @@
 *.tlog
 *.obj
+Dependencies/*
+*.suo
+*.bmp
+*.png
+*.lib
+*.dll
+*.log
+*.idb
+*.pdb
+*.db
+*.user
+*.exe
+*.ilk
+*.filters
+*.sdf
