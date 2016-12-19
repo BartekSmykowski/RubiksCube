@@ -2,6 +2,7 @@
 #include "..\Tile.h"
 #include "glm\glm.hpp"
 #include "../Action/Animator.h"
+#include "../Action/Translation.h"
 
 
 using namespace RubicsCube::Action;
@@ -20,12 +21,14 @@ namespace RubiksCube
 			bool IsRotating();
 			void setLengthOfEdge(double length);
 			double getLengthOfEdge();
+			Translation *getTranslation();
 
 			glm::vec3 getAnimationAngle();
 
 		private:
 			Animator animator;
 			double lengthOfEdge;
+			Translation *translation;
 		};
 	}
 }

@@ -7,6 +7,7 @@
 #include <glm\glm.hpp>
 #include "BricksContainer.h"
 #include "Action\Animator.h"
+#include "Action\Translation.h"
 
 namespace RubiksCube
 {
@@ -16,6 +17,7 @@ namespace RubiksCube
 	public:
 		Cube();
 		Cube(int size);
+		Cube(int size, glm::vec3 translation);
 		void rotate_wall(orientation_type wall, rotate_direction_t direction);
 		void KeyEventCallback(unsigned char key, int x, int y);
 		Brick *get_brick(glm::vec3 wpolzedne);
@@ -29,6 +31,7 @@ namespace RubiksCube
 		BricksContainer *bricksContainer;
 		int size;
 		Animator animator;
+		glm::vec3 translation;
 
 	};
 }

@@ -136,6 +136,7 @@
   <ItemGroup>
     <None Include="Shaders\Cube_Fragment_Shader.glsl" />
     <None Include="Shaders\Cube_Vertex_Shader.glsl" />
+    <None Include="Shaders\Floor_Vertex_Shader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

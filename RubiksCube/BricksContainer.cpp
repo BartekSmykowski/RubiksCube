@@ -4,6 +4,7 @@ using namespace RubiksCube;
 
 BricksContainer::BricksContainer() {
 	size = 3;
+	this->translation = glm::vec3(0, 0, 0);
 
 	bricks_ = new Brick***[size];
 	for (int i = 0; i < size; i++)
@@ -26,6 +27,7 @@ BricksContainer::BricksContainer() {
 
 BricksContainer::BricksContainer(int size) {
 	this->size = size;
+	this->translation = glm::vec3(0, 0, 0);
 
 	bricks_ = new Brick***[size];
 	for (int i = 0; i < size; i++)
@@ -43,7 +45,29 @@ BricksContainer::BricksContainer(int size) {
 		}
 	}
 
-};
+}
+RubiksCube::BricksContainer::BricksContainer(int size, glm::vec3 translation)
+{
+	this->size = size;
+	this->translation = translation;
+
+	bricks_ = new Brick***[size];
+	for (int i = 0; i < size; i++)
+		bricks_[i] = new Brick**[size];
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			bricks_[i][j] = new Brick*[size];
+		}
+	}
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			for (int k = 0; k < size; k++) {
+				bricks_[i][j][k] = nullptr;
+			}
+		}
+	}
+}
+;
 
 BricksContainer::BricksContainer(const BricksContainer& bricksContainer) {
 	this->size = bricksContainer.size;
@@ -200,12 +224,23 @@ void RubiksCube::BricksContainer::fill(int size)
 	}
 	this->setBrick(glm::vec3(indexOfEnd, indexOfEnd, indexOfEnd), new Corner(UP, FRONT, RIGHT));
 
-
+	{
+		Brick *brick1 = this->getBrick(glm::vec3(0, 0, 0));
+		Translation *trans1 = brick1->getTranslation();
+		trans1->SetTranslation(translation);
+		Brick *brick2 = this->getBrick(glm::vec3(0, 0, 0));
+		Translation *trans2 = brick2->getTranslation();
+		trans2->SetTranslation(translation);
+	}
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
 			for (int k = 0; k < size; k++) {
-				if (this->getBrick(glm::vec3(i, j, k)) != nullptr)
-					this->getBrick(glm::vec3(i, j, k))->setLengthOfEdge(1.0/(double)size*2.0);
+				if (this->getBrick(glm::vec3(i, j, k)) != nullptr) {
+					this->getBrick(glm::vec3(i, j, k))->setLengthOfEdge(1.0 / (double)size*2.0);
+					Brick *brick = this->getBrick(glm::vec3(i, j, k));
+					Translation *trans = brick->getTranslation();
+					trans->SetTranslation(translation);
+				}
 			}
 		}
 	}

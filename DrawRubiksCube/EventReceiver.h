@@ -3,6 +3,7 @@
 #include "RubiksCube\Cube.h"
 #include "BrickModel.h"
 #include "BricksModelsManager.h"
+#include <vector>
 
 using namespace BasicEngine;
 using namespace RubiksCube;
@@ -19,9 +20,9 @@ public:
 	static void PassiveMouseMoveCallback(int x, int y);
 private:
 
-	static Cube *cube;
+	static vector<Cube *> cubes;
 	static Engine *engine;
-	static BricksModelsManager *bricksModelsManager;
+	static vector<BricksModelsManager *> bricksModelsManagers;
 	static int x;
 	static int y;
 
