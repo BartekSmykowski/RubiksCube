@@ -1,35 +1,31 @@
 #include "EventReceiver.h"
-#include "BricksModelsManager.h"
-#include "Action\Petla.h"
+#include "MazeModel\maze.h"
+#include "DrawMaze\WallModelsManager.h"
 #include "FloorModel.h"
+#include "DrawMaze\WallModel.h"
+#include "soil\SOIL_ext.h"
+
 
 using namespace BasicEngine;
-using namespace RubiksCube;
+using namespace MazeModel;
+using namespace DrawMaze;
 
 int main(int argc, char **argv)
 {
-	Cube *cube3 = new Cube(1, glm::vec3(0,0,0));
-	Cube *cube2 = new Cube(2, glm::vec3(5, 0, 10));
-	Cube *cube4 = new Cube(3, glm::vec3(-5, 0, 0));
 	Engine *engine = new Engine();
 	engine->Init();
+	Maze *maze = new Maze();
+	engine->GetScene_Manager()->SetCamera(*(maze->Getplayer()->GetCamera()));
 
 	//local shaders
-	engine->GetShader_Manager()->CreateProgram("brickShader",
-		"Shaders\\Cube_Vertex_Shader.glsl",
-		"Shaders\\Cube_Fragment_Shader.glsl");
+	engine->GetShader_Manager()->CreateProgram("wallShader",
+		"Shaders\\Wall_Textured_Vertex_Shader.glsl",
+		"Shaders\\Wall_Textured_Fragment_Shader.glsl");
 
-	BricksModelsManager *bricksModelsManager3 = new BricksModelsManager(cube3, engine);
-	BricksModelsManager *bricksModelsManager2 = new BricksModelsManager(cube2, engine);
-	BricksModelsManager *bricksModelsManager4 = new BricksModelsManager(cube4, engine);
+	WallsModelsManager *wallsModelsManager = new WallsModelsManager(maze, engine);
 
 	EventReceiver::setEngine(engine);
-	EventReceiver::setCube(cube4);
-	EventReceiver::setModelsManager(bricksModelsManager4);
-	EventReceiver::setCube(cube2);
-	EventReceiver::setModelsManager(bricksModelsManager2);
-	EventReceiver::setCube(cube3);
-	EventReceiver::setModelsManager(bricksModelsManager3);
+	EventReceiver::setPlayer(maze->Getplayer());
 	engine->GetEvents_Manager()->setKeyDownCallback(EventReceiver::KeyCallback);
 	engine->GetEvents_Manager()->setMouseMoveCallback(EventReceiver::MouseMoveCallback);
 	engine->GetEvents_Manager()->setPassiveMouseMoveCallback(EventReceiver::PassiveMouseMoveCallback);
@@ -40,16 +36,17 @@ int main(int argc, char **argv)
 		"Shaders\\Cube_Fragment_Shader.glsl");
 	FloorModel* floor = new FloorModel();
 	floor->SetProgram(engine->GetShader_Manager()->GetShader("floorShader"));
-	floor->Create(-2); 
+	floor->Create(-5);
 	engine->GetModels_Manager()->SetModel("floor", floor);
 	FloorModel* floor2 = new FloorModel();
 	floor2->SetProgram(engine->GetShader_Manager()->GetShader("floorShader"));
-	floor2->Create(2);
+	floor2->Create(5);
 	engine->GetModels_Manager()->SetModel("floor2", floor2);
 
 	engine->Run();
 
+	delete wallsModelsManager;
 	delete engine;
-	delete cube3;
+	delete maze;
 	return 0;
 }

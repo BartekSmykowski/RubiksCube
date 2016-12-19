@@ -31,38 +31,39 @@ void EventReceiver::setModelsManager(BricksModelsManager *bmm) {
 }
 
 void EventReceiver::KeyCallback(unsigned char key, int x, int y){
-	for (int i = 0; i < cubes.size(); i++) {
-		switch (key) {
-		case 'a':case 'w':case 'd':case 's':case 'e':
-			engine->GetScene_Manager()->notifyKeyDown(key, x, y);
-			break;
-		case 'u':
-			cubes[i]->rotate_wall(UP, CLOCK);
-			break;
-		case 'n':
-			cubes[i]->rotate_wall(DOWN, CLOCK);
-			break;
-		case 'y':
-			cubes[i]->rotate_wall(LEFT, CLOCK);
-			break;
-		case 'i':
-			cubes[i]->rotate_wall(RIGHT, CLOCK);
-			break;
-		case 'h':
-			cubes[i]->rotate_wall(FRONT, CLOCK);
-			break;
-		case 'k':
-			cubes[i]->rotate_wall(BACK, CLOCK);
-			break;
+	if(key == 'a' || key == 'w' || key == 'd' || key == 's')
+		engine->GetScene_Manager()->notifyKeyDown(key, x, y);
+	else {
+		for (int i = 0; i < cubes.size(); i++) {
+			switch (key) {
+			case 'u':
+				cubes[i]->rotate_wall(UP, CLOCK);
+				break;
+			case 'n':
+				cubes[i]->rotate_wall(DOWN, CLOCK);
+				break;
+			case 'y':
+				cubes[i]->rotate_wall(LEFT, CLOCK);
+				break;
+			case 'i':
+				cubes[i]->rotate_wall(RIGHT, CLOCK);
+				break;
+			case 'h':
+				cubes[i]->rotate_wall(FRONT, CLOCK);
+				break;
+			case 'k':
+				cubes[i]->rotate_wall(BACK, CLOCK);
+				break;
+			}
+			bricksModelsManagers[i]->updateBricksModels();
 		}
-		bricksModelsManagers[i]->updateBricksModels();
 	}
 }
 
 void EventReceiver::MouseMoveCallback(int x, int y) {
+	engine->GetScene_Manager()->notifyMouseMove(x, y);
 	for (int i = 0; i < cubes.size(); i++) {
 		int mod = 0;
-		engine->GetScene_Manager()->notifyMouseMove(x, y);
 		glm::vec3 rotationOld = cubes[i]->getRotation();
 		i % 2 == 0 ? mod = -1 : mod = 1;
 		glm::vec3 newRotation = rotationOld + glm::vec3(mod*(y - EventReceiver::y), mod*(x - EventReceiver::x), 0);
