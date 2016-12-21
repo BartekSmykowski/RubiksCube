@@ -1,6 +1,7 @@
 #pragma once
 #include <glm\glm.hpp>
 #include <BasicEngine\Camera\CameraFPSEuler.h>
+#include "Collider.h"
 
 using namespace BasicEngine::Camera;
 
@@ -16,10 +17,13 @@ namespace MazeModel {
 		void notifyKeyDown(const char key);
 		CameraFPSEuler *GetCamera();
 		void setPosition(glm::vec2 position);
+		void SetCollisionMap(char **colisionMap, int x, int y);
 
 	private:
 		CameraFPSEuler *camera;
 		glm::vec2 position;
+		char **colisionMap;
+		Collider *collider;
 
 	};
 }

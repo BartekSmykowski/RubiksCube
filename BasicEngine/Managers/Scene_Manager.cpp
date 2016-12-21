@@ -6,10 +6,10 @@ using namespace Managers;
 
 Scene_Manager::Scene_Manager()
 {
-	camera = Camera::CameraFPSEuler();
+	camera = new Camera::CameraFPSEuler();
 	glEnable(GL_DEPTH_TEST);
 	
-	view_matrix = camera.GetViewMatrix();
+	view_matrix = camera->GetViewMatrix();
 	//view_matrix = glm::mat4(1.0f, 0.0f, 0.0f, 0.0f,
 	//						0.0f, 1.0f, 0.0f, 0.0f,
 	//						0.0f, 0.0f, -1.0f, 0.0f,
@@ -33,7 +33,7 @@ void Scene_Manager::NotifyDisplayFrame()
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 
 	models_manager->Draw();
-	models_manager->Draw(projection_matrix, camera.GetViewMatrix());
+	models_manager->Draw(projection_matrix, camera->GetViewMatrix());
 }
 
 void Scene_Manager::NotifyEndFrame()
@@ -55,16 +55,16 @@ void Scene_Manager::NotifyReshape(int width, int height,
 }
 
 void Scene_Manager::notifyKeyDown(unsigned char key, int x, int y) {
-	camera.KeyPressed(key);
+	camera->KeyPressed(key);
 }
 
 void Scene_Manager::notifyMouseMove(int x, int y) {
-	camera.MousePressed(x, y);
+	camera->MousePressed(x, y);
 }
 
 void BasicEngine::Managers::Scene_Manager::notifyPassiveMouseMove(int x, int y)
 {
-	camera.MouseMove(x, y);
+	camera->MouseMove(x, y);
 }
 
 Managers::Models_Manager* Scene_Manager::GetModels_Manager()
@@ -77,12 +77,12 @@ void Scene_Manager::SetModelsManager(Managers::Models_Manager*& models_m)
 	models_manager = models_m;
 }
 
-Camera::CameraFPSEuler BasicEngine::Managers::Scene_Manager::GetCamera()
+Camera::CameraFPSEuler *BasicEngine::Managers::Scene_Manager::GetCamera()
 {
 	return camera;
 }
 
-void BasicEngine::Managers::Scene_Manager::SetCamera(Camera::CameraFPSEuler camera)
+void BasicEngine::Managers::Scene_Manager::SetCamera(Camera::CameraFPSEuler *camera)
 {
 	this->camera = camera;
 }

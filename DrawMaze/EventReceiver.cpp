@@ -27,8 +27,8 @@ void EventReceiver::setEngine(Engine *engine) {
 }
 
 void EventReceiver::KeyCallback(unsigned char key, int x, int y){
-	engine->GetScene_Manager()->notifyKeyDown(key, x, y);
-	//player->notifyKeyDown(key);
+	//engine->GetScene_Manager()->notifyKeyDown(key, x, y);
+	player->notifyKeyDown(key);
 }
 
 void EventReceiver::MouseMoveCallback(int x, int y) {

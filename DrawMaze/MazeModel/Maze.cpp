@@ -10,6 +10,7 @@ MazeModel::Maze::Maze()
 	dimensions.y = 0;
 	player = new MazeModel::Player();
 	LoadFromFile(".\\SavedMazes\\labirynt_domyslny");
+	player->SetCollisionMap(this->board, dimensions.x, dimensions.y);
 }
 
 MazeModel::Maze::~Maze()

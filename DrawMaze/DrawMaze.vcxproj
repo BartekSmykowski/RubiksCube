@@ -132,6 +132,7 @@
     <ClCompile Include="EventReceiver.cpp" />
     <ClCompile Include="FloorModel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MazeModel\Collider.cpp" />
     <ClCompile Include="MazeModel\Maze.cpp" />
     <ClCompile Include="MazeModel\Player.cpp" />
   </ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="DrawMaze\WallModelsManager.h" />
     <ClInclude Include="EventReceiver.h" />
     <ClInclude Include="FloorModel.h" />
+    <ClInclude Include="MazeModel\Collider.h" />
     <ClInclude Include="MazeModel\Enums.h" />
     <ClInclude Include="MazeModel\maze.h" />
     <ClInclude Include="MazeModel\Player.h" />

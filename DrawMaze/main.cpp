@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 	Engine *engine = new Engine();
 	engine->Init();
 	Maze *maze = new Maze();
-	engine->GetScene_Manager()->SetCamera(*(maze->Getplayer()->GetCamera()));
+	engine->GetScene_Manager()->SetCamera((maze->Getplayer()->GetCamera()));
 
 	//local shaders
 	engine->GetShader_Manager()->CreateProgram("wallShader",
@@ -36,11 +36,11 @@ int main(int argc, char **argv)
 		"Shaders\\Cube_Fragment_Shader.glsl");
 	FloorModel* floor = new FloorModel();
 	floor->SetProgram(engine->GetShader_Manager()->GetShader("floorShader"));
-	floor->Create(-5);
+	floor->Create(-1);
 	engine->GetModels_Manager()->SetModel("floor", floor);
 	FloorModel* floor2 = new FloorModel();
 	floor2->SetProgram(engine->GetShader_Manager()->GetShader("floorShader"));
-	floor2->Create(5);
+	floor2->Create(1);
 	engine->GetModels_Manager()->SetModel("floor2", floor2);
 
 	engine->Run();

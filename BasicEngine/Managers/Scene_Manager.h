@@ -22,8 +22,8 @@ namespace BasicEngine
 			virtual void notifyMouseMove(int x, int y);
 			virtual void notifyPassiveMouseMove(int x, int y);
 			void SetModelsManager(Managers::Models_Manager*& models_manager);
-			Camera::CameraFPSEuler GetCamera();
-			void SetCamera(Camera::CameraFPSEuler camera);
+			Camera::CameraFPSEuler *GetCamera();
+			void SetCamera(Camera::CameraFPSEuler *camera);
 
 			Managers::Models_Manager* GetModels_Manager();
 
@@ -31,7 +31,7 @@ namespace BasicEngine
 			Managers::Models_Manager* models_manager;
 			glm::mat4 projection_matrix;
 			glm::mat4 view_matrix;
-			Camera::CameraFPSEuler camera;
+			Camera::CameraFPSEuler *camera;
 		};
 
 	}
