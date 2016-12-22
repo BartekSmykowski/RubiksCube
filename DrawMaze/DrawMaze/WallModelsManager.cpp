@@ -3,6 +3,8 @@
 #include <string>
 #include "soil\SOIL_ext.h"
 #include "TexturesManager.h"
+#include "CeilingModel.h"
+#include "FloorModel.h"
 
 using namespace BasicEngine;
 using namespace DrawMaze;
@@ -23,22 +25,23 @@ WallsModelsManager::WallsModelsManager(Maze *maze, Engine *engine) {
 }
 
 void WallsModelsManager::updateBricksModels() {
-	WallModel* brickm = new WallModel();
-	for (double i = 0; i < maze->GetDimensions().x; i++) {
-		for (double j = 0; j < maze->GetDimensions().y; j++) {
-			if (maze->GetTypeOfWall(glm::vec2(i, j)) != ' ') {
-				std::string nazwa = "wall" + std::to_string((int)i) + std::to_string((int)j);
-				brickm = (WallModel*)engine->GetModels_Manager()->GetModel(nazwa);
-			}
-		}
-	}
+	//WallModel* brickm = new WallModel();
+	//for (double i = 0; i < maze->GetDimensions().x; i++) {
+	//	for (double j = 0; j < maze->GetDimensions().y; j++) {
+	//		if (maze->GetTypeOfWall(glm::vec2(i, j)) != ' ') {
+	//			std::string nazwa = "wall" + std::to_string((int)i) + std::to_string((int)j);
+	//			brickm = (WallModel*)engine->GetModels_Manager()->GetModel(nazwa);
+	//		}
+	//	}
+	//}
 }
 
 void WallsModelsManager::createBricksModels()
 {
 	TexturesManager textMnanager = TexturesManager();
 	textMnanager.LoadTextures();
-	colorT color;
+	colorT color = GRAY;
+	//walls
 	for (int i = 0; i < maze->GetDimensions().x; i++) {
 		for (int j = 0; j < maze->GetDimensions().y; j++) {
 			if (maze->GetTypeOfWall(glm::vec2(i,j)) != ' ') {
@@ -51,6 +54,25 @@ void WallsModelsManager::createBricksModels()
 				std::string nazwa = "wall" + std::to_string(i) + std::to_string(j);
 				engine->GetModels_Manager()->SetModel(nazwa, wallm);
 			}
+		}
+	}
+	//floor and ceiling
+	for (int i = 0; i < maze->GetDimensions().x; i++) {
+		for (int j = 0; j < maze->GetDimensions().y; j++) {
+			CeilingModel* ceilingModel = new CeilingModel();
+			ceilingModel->SetProgram(engine->GetShader_Manager()->GetShader("wallShader"));
+			ceilingModel->Create(glm::vec3(i, 0, j), color);
+			GLuint texturec = textMnanager.GetTexture("CeilingTexture");
+			ceilingModel->SetTexture("CeilingTexture", texturec);
+			std::string nazwac = "ceilingModel" + std::to_string(i) + "y" + std::to_string(j);
+			engine->GetModels_Manager()->SetModel(nazwac, ceilingModel);
+			FloorModel* floorModel = new FloorModel();
+			floorModel->SetProgram(engine->GetShader_Manager()->GetShader("wallShader"));
+			floorModel->Create(glm::vec3(i, 0, j), color);
+			GLuint texturef = textMnanager.GetTexture("FloorTexture");
+			floorModel->SetTexture("FloorTexture", texturef);
+			std::string nazwaf = "floorModel" + std::to_string(i) + "y" + std::to_string(j);
+			engine->GetModels_Manager()->SetModel(nazwaf, floorModel);
 		}
 	}
 }

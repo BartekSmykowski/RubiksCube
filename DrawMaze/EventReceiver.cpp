@@ -32,7 +32,9 @@ void EventReceiver::KeyCallback(unsigned char key, int x, int y){
 }
 
 void EventReceiver::MouseMoveCallback(int x, int y) {
-	engine->GetScene_Manager()->notifyMouseMove(x, y);
+	//engine->GetScene_Manager()->notifyMouseMove(x, y);
+	engine->GetScene_Manager()->notifyPassiveMouseMove(x, y);
+	player->notifyKeyDown('w');
 	//player->notifyMouseMovePressed(x, y);
 	EventReceiver::x = x;
 	EventReceiver::y = y;

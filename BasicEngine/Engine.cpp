@@ -10,9 +10,9 @@ Engine::Engine()
 //You can set params for init
 bool Engine::Init()
 {
-	WindowInfo window(std::string("in2gpu OpenGL Chapter 2 tutorial"),
+	WindowInfo window(std::string("Lab"),
 		60, 20,
-		1000, 700, true);
+		1100, 700, true);
 	ContextInfo context(4, 3, true);
 	FramebufferInfo frameBufferInfo(true, true, true, true);
 

@@ -126,22 +126,24 @@
     <None Include="Shaders\Wall_Textured_Vertex_Shader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DrawMaze\CeilingModel.cpp" />
+    <ClCompile Include="DrawMaze\FloorModel.cpp" />
     <ClCompile Include="DrawMaze\TexturesManager.cpp" />
     <ClCompile Include="DrawMaze\WallModel.cpp" />
     <ClCompile Include="DrawMaze\WallModelsManager.cpp" />
     <ClCompile Include="EventReceiver.cpp" />
-    <ClCompile Include="FloorModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MazeModel\Collider.cpp" />
     <ClCompile Include="MazeModel\Maze.cpp" />
     <ClCompile Include="MazeModel\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DrawMaze\CeilingModel.h" />
+    <ClInclude Include="DrawMaze\FloorModel.h" />
     <ClInclude Include="DrawMaze\TexturesManager.h" />
     <ClInclude Include="DrawMaze\WallModel.h" />
     <ClInclude Include="DrawMaze\WallModelsManager.h" />
     <ClInclude Include="EventReceiver.h" />
-    <ClInclude Include="FloorModel.h" />
     <ClInclude Include="MazeModel\Collider.h" />
     <ClInclude Include="MazeModel\Enums.h" />
     <ClInclude Include="MazeModel\maze.h" />

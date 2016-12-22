@@ -1,7 +1,6 @@
 #include "EventReceiver.h"
 #include "MazeModel\maze.h"
 #include "DrawMaze\WallModelsManager.h"
-#include "FloorModel.h"
 #include "DrawMaze\WallModel.h"
 #include "soil\SOIL_ext.h"
 
@@ -29,19 +28,6 @@ int main(int argc, char **argv)
 	engine->GetEvents_Manager()->setKeyDownCallback(EventReceiver::KeyCallback);
 	engine->GetEvents_Manager()->setMouseMoveCallback(EventReceiver::MouseMoveCallback);
 	engine->GetEvents_Manager()->setPassiveMouseMoveCallback(EventReceiver::PassiveMouseMoveCallback);
-
-	//local shaders
-	engine->GetShader_Manager()->CreateProgram("floorShader",
-		"Shaders\\Floor_Vertex_Shader.glsl",
-		"Shaders\\Cube_Fragment_Shader.glsl");
-	FloorModel* floor = new FloorModel();
-	floor->SetProgram(engine->GetShader_Manager()->GetShader("floorShader"));
-	floor->Create(-1);
-	engine->GetModels_Manager()->SetModel("floor", floor);
-	FloorModel* floor2 = new FloorModel();
-	floor2->SetProgram(engine->GetShader_Manager()->GetShader("floorShader"));
-	floor2->Create(1);
-	engine->GetModels_Manager()->SetModel("floor2", floor2);
 
 	engine->Run();
 

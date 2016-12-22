@@ -91,8 +91,18 @@ void MazeModel::Player::notifyKeyDown(const char key)
 	//	camera->setEyeVector(glm::vec3(position.x, 0, position.y));
 	//	camera->UpdateView();
 	//}
-	if (collider->checkCollision(glm::vec2(position.x + eyeVectorTmp.x, position.y + eyeVectorTmp.z))) {
-		position += glm::vec2(eyeVectorTmp.x, eyeVectorTmp.z);
+	//if (collider->checkCollision(glm::vec2(position.x + eyeVectorTmp.x, position.y + eyeVectorTmp.z))) {
+	//	position += glm::vec2(eyeVectorTmp.x, eyeVectorTmp.z);
+	//	camera->setEyeVector(glm::vec3(position.x, 0, position.y));
+	//	camera->UpdateView();
+	//}
+	if (collider->checkCollision(glm::vec2(position.x + eyeVectorTmp.x, position.y))) {
+		position += glm::vec2(eyeVectorTmp.x, 0);
+		camera->setEyeVector(glm::vec3(position.x, 0, position.y));
+		camera->UpdateView();
+	}
+	if (collider->checkCollision(glm::vec2(position.x, position.y + eyeVectorTmp.z))) {
+		position += glm::vec2(0, eyeVectorTmp.z);
 		camera->setEyeVector(glm::vec3(position.x, 0, position.y));
 		camera->UpdateView();
 	}
