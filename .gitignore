@@ -17,3 +17,5 @@ Dependencies/*
 *.sdf
 *.tmp
 *.opendb
+*.sbr
+*.bsc
