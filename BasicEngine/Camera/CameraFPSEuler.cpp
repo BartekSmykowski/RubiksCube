@@ -3,6 +3,9 @@
 #include <glm\gtx\quaternion.hpp>
 #include <iostream>
 #include <freeglut\freeglut.h>
+
+#define PI 3.14159265
+
 using namespace std;
 
 using namespace BasicEngine::Camera;
@@ -10,8 +13,8 @@ using namespace BasicEngine::Camera;
 CameraFPSEuler::CameraFPSEuler()
 {
 	eyeVector = glm::vec3(0,0,-5);
-	pitch = -3.14159265;
-	yaw = -3.14159265;
+	pitch = 0;
+	yaw = 0;
 	mousePosition = glm::vec2(glutGet(GLUT_WINDOW_WIDTH)/2, glutGet(GLUT_WINDOW_HEIGHT)/2);
 
 	UpdateView();
@@ -20,8 +23,8 @@ CameraFPSEuler::CameraFPSEuler()
 BasicEngine::Camera::CameraFPSEuler::CameraFPSEuler(float pitch, float yaw, glm::vec3 eyeVector)
 {
 	this->eyeVector = eyeVector;
-	this->pitch = yaw;
-	this->yaw = pitch;
+	this->pitch = pitch;
+	this->yaw = yaw;
 	mousePosition = glm::vec2(glutGet(GLUT_WINDOW_WIDTH) / 2, glutGet(GLUT_WINDOW_HEIGHT) / 2);
 	UpdateView();
 }
@@ -32,8 +35,8 @@ BasicEngine::Camera::CameraFPSEuler::~CameraFPSEuler()
 
 void CameraFPSEuler::UpdateView()
 {
-	//cout << "Yaw: " << yaw << endl;
-	//cout << "Pitch: " << pitch << endl;
+	cout << "Yaw: " << yaw << endl;
+	cout << "Pitch: " << pitch << endl;
 	glm::mat4 matPitch = glm::mat4(1.0f);
 	glm::mat4 matYaw = glm::mat4(1.0f);
 
@@ -46,13 +49,6 @@ void CameraFPSEuler::UpdateView()
 	translate = glm::translate(translate, -eyeVector);
 
 	viewMatrix = rotate * translate;
-
-	//glm::mat4 mirror = glm::mat4(1.0f);
-	//mirror[2][2] = 1.0;
-	//mirror[1][1] = 1.0;
-	//mirror[0][0] = 1.0;
-
-	//viewMatrix = rotate * translate * mirror;
 }
 
 glm::mat4 CameraFPSEuler::GetViewMatrix() const
@@ -113,7 +109,9 @@ void CameraFPSEuler::MouseMove(int x, int y)
 	const float mouseX_Sensitivity = 0.01f;
 	const float mouseY_Sensitivity = 0.01f;
 	yaw -= mouseX_Sensitivity * mouse_delta.x;
-	pitch -= mouseY_Sensitivity * mouse_delta.y;
+
+	//if (pitch - mouseY_Sensitivity * mouse_delta.x < PI / 2 && pitch - mouseY_Sensitivity * mouse_delta.x > -PI / 2)
+		pitch -= mouseY_Sensitivity * mouse_delta.y;
 
 	mousePosition = glm::vec2(x, y);
 	UpdateView();
@@ -133,4 +131,9 @@ glm::vec3 BasicEngine::Camera::CameraFPSEuler::GetEyeVector()
 void BasicEngine::Camera::CameraFPSEuler::setEyeVector(glm::vec3 eyeVector)
 {
 	this->eyeVector = eyeVector;
+}
+
+float BasicEngine::Camera::CameraFPSEuler::GetYaw()
+{
+	return yaw;
 }

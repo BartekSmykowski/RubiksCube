@@ -13,7 +13,5 @@ namespace MazeModel {
 		bool **collisionMap;
 		int width; 
 		int height;
-
 	};
-
 }

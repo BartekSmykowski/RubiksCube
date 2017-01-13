@@ -5,6 +5,7 @@
 #include "TexturesManager.h"
 #include "CeilingModel.h"
 #include "FloorModel.h"
+#include "PlayerModel.h"
 
 using namespace BasicEngine;
 using namespace DrawMaze;
@@ -25,15 +26,9 @@ WallsModelsManager::WallsModelsManager(Maze *maze, Engine *engine) {
 }
 
 void WallsModelsManager::updateBricksModels() {
-	//WallModel* brickm = new WallModel();
-	//for (double i = 0; i < maze->GetDimensions().x; i++) {
-	//	for (double j = 0; j < maze->GetDimensions().y; j++) {
-	//		if (maze->GetTypeOfWall(glm::vec2(i, j)) != ' ') {
-	//			std::string nazwa = "wall" + std::to_string((int)i) + std::to_string((int)j);
-	//			brickm = (WallModel*)engine->GetModels_Manager()->GetModel(nazwa);
-	//		}
-	//	}
-	//}
+
+	PlayerModel *pm = (PlayerModel*)engine->GetModels_Manager()->GetModel("Player");
+
 }
 
 void WallsModelsManager::createBricksModels()
@@ -75,6 +70,12 @@ void WallsModelsManager::createBricksModels()
 			engine->GetModels_Manager()->SetModel(nazwaf, floorModel);
 		}
 	}
+	PlayerModel *playerm = new PlayerModel();
+	playerm->SetProgram(engine->GetShader_Manager()->GetShader("playerShader"));
+	playerm->Create(maze->Getplayer());
+	GLuint texturep = textMnanager.GetTexture("PlayerTexture");
+	playerm->SetTexture("PlayerTexture", texturep);
+	engine->GetModels_Manager()->SetModel("Player", playerm);
 }
 
 colorT DrawMaze::WallsModelsManager::PrzypiszKolor(char type)

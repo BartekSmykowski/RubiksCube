@@ -126,12 +126,15 @@
     <None Include="Shaders\Cube_Fragment_Shader.glsl" />
     <None Include="Shaders\Cube_Vertex_Shader.glsl" />
     <None Include="Shaders\Floor_Vertex_Shader.glsl" />
+    <None Include="Shaders\Player_Fragment_Shader.glsl" />
+    <None Include="Shaders\Player_Vertex_Shader.glsl" />
     <None Include="Shaders\Wall_Textured_Fragment_Shader.glsl" />
     <None Include="Shaders\Wall_Textured_Vertex_Shader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawMaze\CeilingModel.cpp" />
     <ClCompile Include="DrawMaze\FloorModel.cpp" />
+    <ClCompile Include="DrawMaze\PlayerModel.cpp" />
     <ClCompile Include="DrawMaze\TexturesManager.cpp" />
     <ClCompile Include="DrawMaze\WallModel.cpp" />
     <ClCompile Include="DrawMaze\WallModelsManager.cpp" />
@@ -144,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="DrawMaze\CeilingModel.h" />
     <ClInclude Include="DrawMaze\FloorModel.h" />
+    <ClInclude Include="DrawMaze\PlayerModel.h" />
     <ClInclude Include="DrawMaze\TexturesManager.h" />
     <ClInclude Include="DrawMaze\WallModel.h" />
     <ClInclude Include="DrawMaze\WallModelsManager.h" />

@@ -15,6 +15,7 @@ namespace BasicEngine {
 			void MousePressed(int x, int y);
 			glm::vec3 GetEyeVector();
 			void setEyeVector(glm::vec3 eyeVector);
+			float GetYaw();
 
 		private:
 			glm::mat4 viewMatrix;

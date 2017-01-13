@@ -20,11 +20,16 @@ int main(int argc, char **argv)
 	engine->GetShader_Manager()->CreateProgram("wallShader",
 		"Shaders\\Wall_Textured_Vertex_Shader.glsl",
 		"Shaders\\Wall_Textured_Fragment_Shader.glsl");
+	//local shaders
+	engine->GetShader_Manager()->CreateProgram("playerShader",
+		"Shaders\\Player_Vertex_Shader.glsl",
+		"Shaders\\Player_Fragment_Shader.glsl");
 
 	WallsModelsManager *wallsModelsManager = new WallsModelsManager(maze, engine);
 
 	EventReceiver::setEngine(engine);
 	EventReceiver::setPlayer(maze->Getplayer());
+	EventReceiver::setModelsManager(wallsModelsManager);
 	engine->GetEvents_Manager()->setKeyDownCallback(EventReceiver::KeyCallback);
 	engine->GetEvents_Manager()->setMouseMoveCallback(EventReceiver::MouseMoveCallback);
 	engine->GetEvents_Manager()->setPassiveMouseMoveCallback(EventReceiver::PassiveMouseMoveCallback);
