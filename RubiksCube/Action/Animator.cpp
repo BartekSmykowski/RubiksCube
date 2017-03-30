@@ -41,7 +41,7 @@ void Animator::StartAnimation(orientation_type side, rotate_direction_t directio
 		if (direction == REVERSE_CLOCK) {
 			rotationAngle *= -1;
 		}
-		animationDelta = rotationAngle / (float)180;
+		animationDelta = rotationAngle / (float)180;  //musi byæ podzielne przez 90
 		this->side = side;
 		this->directon = direction;
 	}
